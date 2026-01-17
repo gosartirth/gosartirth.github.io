@@ -1,0 +1,258 @@
+/* --- RESET & VARIABLES --- */
+:root {
+    --navy: #0a192f;
+    --accent: #0070f3;
+    --slate: #8892b0;
+    --teal: #64ffda;
+    --bg-light: #f8f9fa;
+}
+
+* { box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; line-height: 1.6; color: #333; scroll-behavior: smooth; display: block; }
+section { width: 100%; display: block; position: relative; clear: both; }
+
+.container { max-width: 950px; margin: 0 auto; padding: 0 40px; }
+
+/* --- NAV --- */
+nav { padding: 25px 0; border-bottom: 1px solid #eee; background: white; position: sticky; top: 0; z-index: 1000; }
+nav .container { display: flex; justify-content: space-between; align-items: center; }
+nav .logo { font-weight: 700; color: var(--navy); font-size: 1.2rem; }
+nav ul { list-style: none; display: flex; gap: 30px; margin: 0; }
+nav a { text-decoration: none; color: #333; font-size: 0.9rem; font-weight: 500; }
+
+/* --- HERO --- */
+header { padding: 100px 0 60px; }
+h1 { font-size: 3.5rem; margin: 0; color: var(--navy); letter-spacing: -1.5px; }
+.subtitle { font-size: 1.2rem; color: var(--accent); font-weight: 600; margin-bottom: 40px; }
+.bio-container { border-left: 3px solid #e0e0e0; padding-left: 30px; margin-bottom: 40px; }
+.bio { font-size: 1.1rem; color: #444; margin-bottom: 15px; }
+.contact-bar { font-size: 0.95rem; color: var(--slate); font-weight: 500; }
+.contact-bar a { color: var(--accent); text-decoration: none; margin-right: 15px; }
+
+/* --- ROADMAP --- */
+#roadmap { padding: 80px 0;background-color: #f9fbff; border-top: 1px solid #eee; }
+.section-title { font-size: 1.7rem; color: var(--navy); border-left: 4px solid var(--accent); padding-left: 15px; margin-bottom: 40px; }
+.roadmap-instruction { font-size: 0.75rem; color: var(--slate); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 80px; text-align: center; }
+.roadmap-wrapper { position: relative; height: 4px; background: #e0e6ed; margin: 100px 0; border-radius: 10px; }
+.roadmap-markers { position: absolute; width: 100%; top: -6px; }
+.marker { position: absolute; cursor: pointer; text-decoration: none; }
+.dot { width: 14px; height: 14px; background: var(--accent); border: 2px solid #fff; border-radius: 50%; box-shadow: 0 0 0 1px var(--accent); transition: 0.3s; }
+.dot.empty { background: #fff; box-shadow: 0 0 0 1px #cbd5e0; }
+.dot.red { background: #ff4757; box-shadow: 0 0 0 1px #ff4757; }
+.label { position: absolute; top: 25px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; font-weight: 700; color: var(--navy); white-space: nowrap; }
+.tooltip { position: absolute; bottom: 35px; left: 50%; transform: translateX(-50%) translateY(10px); background: var(--navy); color: white; padding: 12px 16px; border-radius: 6px; opacity: 0; visibility: hidden; transition: 0.3s; z-index: 10; min-width: 180px; box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+.t-company { font-weight: 700; color: var(--teal); display: block; }
+.marker:hover .tooltip { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+
+/* --- EXPERIENCE --- */
+#experience { padding: 80px 0; background: white; }
+/* --- EXPERIENCE HEADER & BUTTON --- */
+.exp-header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+/* Remove bottom margin from title so it aligns perfectly with button */
+.exp-header-main .section-title {
+    margin-bottom: 0;
+}
+
+.toggle-btn {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s all ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap; /* Prevents text from wrapping on small screens */
+}
+
+.toggle-btn:hover {
+    background: var(--accent);
+    color: white;
+}
+
+/* This is the magic class the JavaScript will add */
+.exp-block.force-open .exp-content {
+    max-height: 500px;
+    opacity: 1;
+    margin-top: 20px;
+}
+.experience-list { margin-top: 40px; }
+.exp-block { padding: 30px 0; border-bottom: 1px solid #eee; transition: 0.3s; cursor: pointer; }
+.exp-header { display: flex; justify-content: space-between; align-items: flex-start; }
+.role-info h3 { margin: 0; font-size: 1.2rem; color: var(--navy); }
+.company { color: var(--accent); font-weight: 600; margin: 5px 0 0; font-size: 0.95rem; }
+.date { font-weight: 600; color: var(--slate); font-size: 0.85rem; white-space: nowrap; }
+.exp-content { max-height: 0; overflow: hidden; transition: 0.4s ease-out; opacity: 0; }
+.exp-block:hover .exp-content, .exp-block.latest .exp-content { max-height: 500px; opacity: 1; margin-top: 20px; }
+.experience-list:hover .exp-block.latest:not(:hover) .exp-content { max-height: 0; opacity: 0; margin-top: 0; }
+ul { padding-left: 18px; color: #555; font-size: 0.95rem; }
+
+/* --- RESEARCH PORTFOLIO (Fixed Layout) --- */
+.bg-dark { background: var(--navy); color: white; padding: 80px 0; border-radius: 20px; margin: 40px 20px; width: calc(100% - 40px); }
+.drive-link-box { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 10px; margin-bottom: 40px; border-left: 4px solid var(--teal); width: 100%; display: block; }
+.drive-btn { color: var(--teal); text-decoration: none; font-weight: 700; display: inline-block; margin-top: 5px; }
+
+.project-matrix-card { background: #112240; padding: 35px; border-radius: 12px; border: 1px solid #233554; width: 100%; }
+.research-matrix { margin-top: 25px; background: rgba(0, 0, 0, 0.2); border-radius: 8px; overflow: hidden; width: 100%; }
+.matrix-header { display: flex; padding: 12px 20px; background: rgba(255, 255, 255, 0.05); font-size: 0.75rem; font-weight: 700; color: var(--teal); border-bottom: 1px solid rgba(255,255,255,0.05); }
+.matrix-row { display: flex; align-items: center; padding: 15px 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+.col-company { flex: 3; font-size: 0.9rem; color: #fff; }
+.col-file { flex: 1; text-align: center; }
+.matrix-btn { text-decoration: none; font-size: 0.7rem; font-weight: 700; padding: 6px 14px; border-radius: 4px; color: white; background: rgba(255,255,255,0.1); border: 1px solid transparent; }
+.matrix-btn.excel { color: var(--teal); border: 1px solid var(--teal); background: transparent; margin-left: 5px; }
+.matrix-footer-note { margin-top: 20px; font-size: 0.85rem; color: var(--slate); font-style: italic; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 15px; }
+/* --- SKILLS --- */
+#skills { padding: 80px 0; }
+.skills-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+.skill-tag { background: #f0f4f8; padding: 10px 20px; border-radius: 4px; font-weight: 600; font-size: 0.85rem; color: var(--navy); border: 1px solid #d1d5db; }
+
+/* --- EXTRACURRICULAR --- */
+.extra-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px; }
+.extra-card { background: white; border-radius: 12px; overflow: hidden; border: 1px solid #eee; transition: 0.3s; }
+.extra-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+.extra-img-container { position: relative; height: 220px; overflow: hidden; background: #e2e8f0; }
+.img-shield { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; background: rgba(0,0,0,0); }
+.extra-img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; -webkit-user-drag: none; user-select: none; }
+.extra-info { padding: 25px; }
+.extra-info h3 { margin: 0 0 10px 0; font-size: 1.2rem; color: var(--navy); }
+.extra-info p { margin: 0; font-size: 0.95rem; color: #555; }
+
+footer { padding: 50px 0; text-align: center; color: var(--slate); font-size: 0.8rem; }
+
+@media (max-width: 768px) {
+    /* General Layout */
+    .container {
+        padding: 0 20px;
+    }
+
+    /* Typography */
+    h1 {
+        font-size: 2.5rem;
+    }
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    /* Navigation - Stack vertically or center */
+    nav .container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    nav ul {
+        gap: 15px;
+        padding: 0;
+    }
+    nav a {
+        font-size: 0.8rem;
+    }
+
+    /* ROADMAP: Convert from horizontal to vertical */
+    .roadmap-wrapper {
+        height: auto;
+        background: transparent;
+        margin: 20px 0;
+    }
+    .roadmap-line {
+        display: none; /* Hide the horizontal line */
+    }
+    .roadmap-markers {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        padding-left: 20px;
+        border-left: 2px solid #e0e6ed; /* Vertical line instead */
+    }
+    .marker {
+        position: static !important; /* Override the inline styles like left: 35% */
+        display: block;
+        transform: none !important;
+    }
+    .dot {
+        position: absolute;
+        left: 14px; /* Align with the new vertical border */
+    }
+    .label {
+        position: static;
+        transform: none;
+        display: block;
+        margin-bottom: 5px;
+        font-size: 0.8rem;
+    }
+    .tooltip {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        background: transparent;
+        color: var(--navy);
+        padding: 0;
+        box-shadow: none;
+        min-width: unset;
+    }
+    .t-company {
+        color: var(--accent);
+        font-size: 1rem;
+    }
+    .marker:hover .tooltip {
+        transform: none;
+    }
+
+    /* Experience */
+    .exp-header {
+        flex-direction: column;
+    }
+    .date {
+        margin-top: 5px;
+    }
+
+    /* Research Matrix: Make it scrollable or stack */
+    .research-matrix {
+        overflow-x: auto; /* Allows horizontal swipe on small tables */
+    }
+    .matrix-row {
+        min-width: 450px; /* Ensures content doesn't get crushed */
+    }
+    .bg-dark {
+        margin: 20px 10px;
+        border-radius: 10px;
+    }
+
+    /* Extracurricular */
+    .extra-grid {
+        grid-template-columns: 1fr;
+    }
+    .extra-img-container {
+        height: 180px;
+    }
+}
+
+/* Small Phone Adjustments */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+    .matrix-btn {
+        padding: 5px 8px;
+        font-size: 0.6rem;
+    }
+
+    /* --- ADD THESE LINES BELOW --- */
+    .exp-header-main {
+        gap: 10px;
+    }
+    .toggle-btn {
+        padding: 6px 10px;
+        font-size: 0.65rem;
+    }
+    /* ----------------------------- */
+}
